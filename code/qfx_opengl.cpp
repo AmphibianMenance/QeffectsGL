@@ -784,6 +784,19 @@ bool Initialize()
 	QFX_GPA( glVertex4sv );
 	QFX_GPA( glVertexPointer );
 	QFX_GPA( glViewport );
+	QFX_GPA( glGenBuffers );
+    QFX_GPA( glBindBuffer );
+    QFX_GPA( glBufferData );
+    QFX_GPA( glDeleteBuffers );
+    QFX_GPA( glUseProgram );
+    QFX_GPA( glCreateShader );
+    QFX_GPA( glShaderSource );
+    QFX_GPA( glCompileShader );
+    QFX_GPA( glCreateProgram );
+    QFX_GPA( glAttachShader );
+    QFX_GPA( glLinkProgram );
+    QFX_GPA( glGenVertexArrays );
+    QFX_GPA( glBindVertexArray );
 
 	QFX_GPAW( wglCopyContext );
 	QFX_GPAW( wglCreateContext );

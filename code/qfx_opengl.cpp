@@ -21,6 +21,7 @@
 #include "qfx_log.hpp"
 #include "qfx_opengl.hpp"
 #include "qfx_settings.hpp"
+#include "qfx_renderer.hpp"    // Added for render calls
 
 //=========================================
 // OpenGL Wrapping Functions
@@ -1279,3 +1280,30 @@ BOOL WINAPI wrap_wglUseFontBitmapsA(HDC hdc, DWORD dw1, DWORD dw2, DWORD dw3) { 
 BOOL WINAPI wrap_wglUseFontBitmapsW(HDC hdc, DWORD dw1, DWORD dw2, DWORD dw3) { gl::CheckInit(); return gl::wglUseFontBitmapsW(hdc, dw1, dw2, dw3); }
 BOOL WINAPI wrap_wglUseFontOutlinesA(HDC hdc, DWORD dw1, DWORD dw2, DWORD dw3, FLOAT f1, FLOAT f2, int i, LPGLYPHMETRICSFLOAT pgmf) { gl::CheckInit(); return gl::wglUseFontOutlinesA(hdc, dw1, dw2, dw3, f1, f2, i, pgmf); }
 BOOL WINAPI wrap_wglUseFontOutlinesW(HDC hdc, DWORD dw1, DWORD dw2, DWORD dw3, FLOAT f1, FLOAT f2, int i, LPGLYPHMETRICSFLOAT pgmf) { gl::CheckInit(); return gl::wglUseFontOutlinesW(hdc, dw1, dw2, dw3, f1, f2, i, pgmf); }
+// This is the most important function. It runs every frame.
+BOOL WINAPI wrap_wglSwapBuffers(HDC hdc)
+{
+    gl::CheckInit();
+
+    // TRIGGER THE EFFECTS: This is where Bloom, SSAO, etc. are drawn
+    QFXRenderer::Instance().RenderFrame();
+
+    // PASS TO WRAPPER: If d3dx=1 was set, gl::wglSwapBuffers points to opengl32_DX.dll
+    if (gl::wglSwapBuffers) {
+        return gl::wglSwapBuffers(hdc);
+    }
+    return FALSE;
+}
+
+// This handles resolution changes or when the game window is recreated
+BOOL WINAPI wrap_wglMakeCurrent(HDC hdc, HGLRC hglrc)
+{
+    gl::CheckInit();
+    
+    BOOL bRet = gl::wglMakeCurrent(hdc, hglrc);
+    if (bRet) {
+        // Tell the renderer to refresh its shaders for the new window size
+        QFXRenderer::Instance().Initialize();
+    }
+    return bRet;
+}

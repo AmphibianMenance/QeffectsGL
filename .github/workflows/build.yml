@@ -24,5 +24,5 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: QeffectsGL-Compiled-DLL
-        # Grabs the compiled opengl32.dll and uploads it as a zip
-        path: msvc/**/Release/opengl32.dll
+        # Pull from the bin folder created by your PostBuildEvent
+        path: bin/opengl32.dll

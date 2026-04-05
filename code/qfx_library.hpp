@@ -36,6 +36,7 @@
 #define QFX_LIBRARY_VERSION				"1.3"
 #define QFX_LIBRARY_VENDOR				"Crystice Softworks (" QFX_LIBRARY_TITLE " " QFX_LIBRARY_VERSION ")"
 
+// Annotation: marks singleton classes (no runtime effect)
 #define QFX_SINGLETON
 
 // make sure these identifiers do not conflict with anything

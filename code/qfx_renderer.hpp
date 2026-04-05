@@ -31,6 +31,9 @@ private:
 public:
 	~QFXRenderer();
 	static QFXRenderer& Instance() { typedef QFXRenderer& (*pfnGetInstance)(); static pfnGetInstance pf = &GetInstance; return pf(); }
+
+	void Initialize() { InitializeGL(); }
+	void RenderFrame() { OnSwapBuffers(); }
 	
 	const char *GetExtensionString();
 	BOOL OnSetPixelFormat( HDC hdc, int pixelformat, const PIXELFORMATDESCRIPTOR *ppfd );

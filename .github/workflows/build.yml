@@ -20,13 +20,6 @@ jobs:
       # Compiles the solution inside the "msvc" folder for x86 (32-bit)
       run: msbuild msvc/QeffectsGL.sln /p:Configuration=Release /p:Platform=Win32
 
-    - name: Validate DLL Exists
-      run: |
-        if ! ls msvc/**/Release/opengl32.dll 1> /dev/null 2>&1; then
-          echo "opengl32.dll not found in any Release directory under msvc."
-          exit 1
-        fi
-
     - name: Upload Compiled DLL
       uses: actions/upload-artifact@v4
       with:

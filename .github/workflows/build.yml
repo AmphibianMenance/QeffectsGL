@@ -18,7 +18,7 @@ jobs:
 
     - name: Build the MSVC Solution (32-bit)
       # Compiles the solution inside the "msvc" folder for x86 (32-bit)
-      run: msbuild msvc /p:Configuration=Release /p:Platform=x86
+      run: msbuild msvc /p:Configuration=Release /p:Platform=Win32
 
     - name: Upload Compiled DLL
       uses: actions/upload-artifact@v4

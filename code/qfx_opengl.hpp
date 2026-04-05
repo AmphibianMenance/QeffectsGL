@@ -1489,6 +1489,21 @@ typedef void ( APIENTRY * pfn_glVertex4s )(GLshort x, GLshort y, GLshort z, GLsh
 typedef void ( APIENTRY * pfn_glVertex4sv )(const GLshort *v);
 typedef void ( APIENTRY * pfn_glVertexPointer )(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer);
 typedef void ( APIENTRY * pfn_glViewport )(GLint x, GLint y, GLsizei width, GLsizei height);
+// Add these to the list of function pointers in qfx_opengl.hpp
+typedef void (WINAPI * pfn_glGenBuffers) (GLsizei n, GLuint *buffers);
+typedef void (WINAPI * pfn_glBindBuffer) (GLenum target, GLuint buffer);
+typedef void (WINAPI * pfn_glBufferData) (GLenum target, GLsizeiptr size, const GLvoid *data, GLenum usage);
+typedef void (WINAPI * pfn_glDeleteBuffers) (GLsizei n, const GLuint *buffers);
+typedef void (WINAPI * pfn_glUseProgram) (GLuint program);
+typedef GLuint (WINAPI * pfn_glCreateShader) (GLenum type);
+typedef void (WINAPI * pfn_glShaderSource) (GLuint shader, GLsizei count, const GLchar* const* string, const GLint* length);
+typedef void (WINAPI * pfn_glCompileShader) (GLuint shader);
+typedef GLuint (WINAPI * pfn_glCreateProgram) (void);
+typedef void (WINAPI * pfn_glAttachShader) (GLuint program, GLuint shader);
+typedef void (WINAPI * pfn_glLinkProgram) (GLuint program);
+typedef void (WINAPI * pfn_glGenVertexArrays) (GLsizei n, GLuint *arrays);
+typedef void (WINAPI * pfn_glBindVertexArray) (GLuint array);
+
 
 typedef int   ( WINAPI * pfn_wglChoosePixelFormat )(HDC, const PIXELFORMATDESCRIPTOR*);
 typedef int   ( WINAPI * pfn_wglDescribePixelFormat) (HDC, int, UINT, LPPIXELFORMATDESCRIPTOR);
@@ -1869,6 +1884,21 @@ extern pfn_glVertex4s qglVertex4s;
 extern pfn_glVertex4sv qglVertex4sv;
 extern pfn_glVertexPointer qglVertexPointer;
 extern pfn_glViewport qglViewport;
+// And add the actual variables:
+extern pfn_glGenBuffers qglGenBuffers;
+extern pfn_glBindBuffer qglBindBuffer;
+extern pfn_glBufferData qglBufferData;
+extern pfn_glDeleteBuffers qglDeleteBuffers;
+extern pfn_glUseProgram qglUseProgram;
+extern pfn_glCreateShader qglCreateShader;
+extern pfn_glShaderSource qglShaderSource;
+extern pfn_glCompileShader qglCompileShader;
+extern pfn_glCreateProgram qglCreateProgram;
+extern pfn_glAttachShader qglAttachShader;
+extern pfn_glLinkProgram qglLinkProgram;
+extern pfn_glGenVertexArrays qglGenVertexArrays;
+extern pfn_glBindVertexArray qglBindVertexArray;
+//done
 extern pfn_wglChoosePixelFormat	wglChoosePixelFormat;
 extern pfn_wglDescribePixelFormat wglDescribePixelFormat;
 extern pfn_wglGetPixelFormat wglGetPixelFormat;

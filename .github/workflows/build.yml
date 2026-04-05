@@ -1,0 +1,28 @@
+name: Build QeffectsGL
+
+on: 
+  workflow_dispatch: # Allows you to trigger the build manually
+  push:
+    branches: [ master, main ]
+
+jobs:
+  build-dll:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Add MSBuild to PATH
+      uses: microsoft/setup-msbuild@v2
+
+    - name: Build the MSVC Solution (32-bit)
+      # Compiles the solution inside the "msvc" folder for x86 (32-bit)
+      run: msbuild msvc /p:Configuration=Release /p:Platform=x86
+
+    - name: Upload Compiled DLL
+      uses: actions/upload-artifact@v4
+      with:
+        name: QeffectsGL-Compiled-DLL
+        # Grabs the compiled opengl32.dll and uploads it as a zip
+        path: msvc/**/Release/opengl32.dll

@@ -18,6 +18,7 @@
     <ClCompile Include="..\code\qfx_renderer.cpp" />
     <ClCompile Include="..\code\qfx_settings.cpp" />
     <ClCompile Include="..\code\qfx_shader.cpp" />
+    <ClCompile Include="..\code\gldirect_draw.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="opengl32.def" />
@@ -33,6 +34,8 @@
     <ClInclude Include="..\code\qfx_renderer.hpp" />
     <ClInclude Include="..\code\qfx_settings.hpp" />
     <ClInclude Include="..\code\qfx_shader.hpp" />
+    <ClInclude Include="..\code\gldirect_draw.hpp" />
+    <ClInclude Include="..\code\port_glew.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FAA655A5-6397-41FA-B031-D59C2328FBE5}</ProjectGuid>
